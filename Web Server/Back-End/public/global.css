@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+    --color-one: #ffffff;
+    --color-two: #ffffff;
+    --color-three: #262f33;
+    --color-four: #3993DD;
+    --color-five: #907AD6;
+    --color-shadow: #e7e7e7;
+    --default-shadow: 0 0 10px 0.25px var(--color-shadow);
+    --default-border-radius: 5px;
+    --default-padding: 10px;
+    --navbar-width: 60px;
+    --statusbar-width: 30px;
+}
+
+html, body, main {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+     font-family: 'Open Sans', sans-serif;
+    background-color: var(--color-two);
+}
+
+main {
+    display: grid;
+    grid-template-columns: var(--navbar-width) 1fr 0px;
+    grid-gap: var(--default-padding);
+    grid-template-rows: var(--navbar-width) var(--statusbar-width) 1fr;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, li, a {
+    margin: 0;
+    font-style: none;
+}
+
+h1.big {
+    font-size: 4em;
+    font-weight: 100;
+}
+
+p {
+    font-size: 0.75em;
+}
+
+.statusbar {
+    grid-column: 2 / 3;
+    grid-row: 2;
+    display: flex;
+}
+
+.statusbar .content {
+    background-color: var(--color-one);
+    border-radius: 50px;
+    padding: 5px 10px;
+    box-shadow: var(--default-shadow);
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    background-color: var(--color-one);
+    border-radius: 0 0 var(--default-border-radius) var(--default-border-radius);
+    box-shadow: var(--default-shadow);
+    padding: var(--default-padding);
+    border-left: 5px solid var(--color-four);
+
+    display: flex;
+    align-items: center;
+}
+
+.sidebar {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    background-color: var(--color-three);
+    padding: var(--default-padding);
+    color: var(--color-one);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .content {
+
+}
+
+.main {
+    grid-column: 2 / 3;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: var(--default-padding);
+    grid-template-rows: repeat(3, 1fr) 0px;
+}
+
+.main .content {
+    background-color: var(--color-one);
+    border-radius: var(--default-border-radius);
+    box-shadow: var(--default-shadow);
+    padding: var(--default-padding);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.main .content .banner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main .content .divider {
+    height: 1px;
+    border-radius: 25px;
+    background-color: var(--color-shadow);
+    margin-top: var(--default-padding);
+}
+
+.main .content .stats {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main .content .control {
+        
+}
+
+
+/* Grid layout specs. */
+.one {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.two {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.three {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.four {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.five {
+    grid-column: 3 / -1;
+    grid-row: 1 / 3;
+}
+
+.six {
+    grid-column: 1 / 3;
+    grid-row: 3;
+}
+
+.seven {
+    grid-column: 3 / 5;
+    grid-row: 3;
+}
