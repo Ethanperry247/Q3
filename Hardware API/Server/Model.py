@@ -1,14 +1,18 @@
 class Model:
 
     ''' Model definition. '''
-    def __init__(self):
+    def __init__(self, interface, netops):
+        self.cupType = "None"
+        self.isInterfaceLive = False
         self.lidState = "Open"
         self.conveyorState = "Stopped"
         self.isMotorCalibrating = False
-        self.totalCupsProduced = 0
-        self.cupsPerBox = 0
-        self.cupsInCurrentBox = 0
-        self.totalBoxesProduced = 0
+        self.boxSize = 24
+        self.boxId = None
+        self.netops = netops
+        self.interface = interface(model=self)
+        # interface.startListening()
+        # interface.send([1])
 
     ''' Model use cases. '''
     def getLidState(self):
@@ -19,36 +23,39 @@ class Model:
 
     def getIsMotorCalibrating(self):
         return isMotorCalibrating
-
-    def getTotalCupsProduced(self):
-        return totalCupsProduced
         
     def getCupsPerBox(self):
-        return cupsPerBox
+        return boxSize
 
-    def getCupsInCurrentBox(self):
-        return cupsInCurrentBox
+    def setConveyorState(self):
+        pass
 
-    def getTotalBoxesProduced(self):
-        return totalBoxesProduced
+    def setLidState(self):
+        pass
+
+    def setMotorCalibrationState(self):
+        pass 
 
     def alterLidState(self):
-        pass
+        self.interface.send([3])
 
     def alterConveyorState(self):
-        pass
+        self.interface.send([5])
 
     def alterMotorCalibrationState(self):
-        pass
-
-    def incrementTotalCupsProduced(self):
-        pass
+        self.interface.send([7])
 
     def setCupsPerBox(self, cups):
-        pass
+        self.interface.send([8, cups])
 
-    def incrementCupsInCurrentBox(self):
-        pass
+    def postBox(self):
+        self.boxId = self.netops.postBox(self.boxSize)
 
-    def incrementTotalBoxesProduced(self):
-        pass
+    def postCup(self):
+        self.netops.postCup(self.cupType, self.boxId)
+
+    def manuallyAddCup(self):
+        self.interface.send([2])
+
+    def setInterfaceLiveState(self):
+        self.isInterfaceLive = True

@@ -19,15 +19,18 @@ app.use(express.static(__dirname + '/public'));
 // Routes
 app.post(`/type/:type/boxId/:boxId`, createCallback(postCupController));
 app.post(`/size/:size`, createCallback(postBoxController));
+
 app.post(`/conveyor/:desiredState`, () => {}); // Alters the desired state of the conveyor.
 app.post(`/lid/:desiredState`, () => {}); // Alters the desired state of the lid.
 app.post(`/calibrate`, () => {}); // Calibrates the motor controller.
+
 app.get(`/cups`, createCallback(getCupCountController));
 app.get(`/boxes`, createCallback(getBoxCountController));
 app.get(`/cups/:id`, createCallback(getCupController));
 app.get(`/boxes/:id`, createCallback(getBoxController));
 app.get(`/cups/timeframe/:start-:finish`, () => {}); // Gets all cups within the desired timeframe.
 app.get(`/boxes/timeframe/:start-:finish`, () => {}); // Gets all boxes within the desired timeframe.
+
 app.get(`/conveyor`, () => {}); // Queries the state of the conveyor.
 app.get(`/lid`, () => {}); // Queries the state of the lid.
 
