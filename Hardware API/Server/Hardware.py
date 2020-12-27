@@ -3,6 +3,7 @@ import time
 import threading
 import csv
 
+# The server will send these codes to the controller.
 serverDictionary = {
     1: {
         "Name": "Begin",
@@ -30,6 +31,7 @@ serverDictionary = {
     },
 }
 
+# The controller will send these codes to the server.
 controllerDictionary = {
     1: {
         "Name": "Ready",
@@ -81,7 +83,8 @@ class Interface:
         return list(self.com.read(self.com.inWaiting()))
 
     def send(self, message) -> None:
-        self.com.write(bytes(message))
+        # self.com.write(bytes(message))
+        print(message)
 
     def startListening(self):
         def loopListen():
@@ -95,7 +98,9 @@ class Interface:
     def handleMessage(self, message):
         print(message)
         if (len(message) == 1):
-            controllerDictionary[message]["Action"](self.model)
+            if (controllerDictionary[message]["Action"] is not None):
+                controllerDictionary[message]["Action"](self.model)
+                print(controllerDictionary[message]["Description"])
 
     def stopListening(self):
         self.stop_listening = True

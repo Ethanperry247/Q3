@@ -6,20 +6,26 @@ app = Flask(__name__)
 model = Model.Model(Hardware.Interface, Netops)
 
 @app.route('/setCount/:count')
-def setCupCount():
+def setCupCount(count):
+    model.setCupsPerBox(count)
     return ''
 
 @app.route('/addCup')
 def incrementTotalCupCount():
+    model.manuallyAddCup()
     return ''
 
 @app.route('/alterConveyorState')
 def alterConveyorState():
-    pass
+    model.alterConveyorState()
+    return ''
 
 @app.route('/alterLidState')
 def alterLidState():
-    pass
+    model.alterLidState()
+    return ''
+
 @app.route('/calibrate')
 def calibrate():
-    pass
+    model.alterMotorCalibrationState()
+    return ''

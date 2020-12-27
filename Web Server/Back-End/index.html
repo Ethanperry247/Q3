@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./global.css">
-    <!-- <script src="Textview.js"></script> -->
-    <!-- <script src="Chart.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" href="./media.css">
+    <link href="./picker.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./picker.js"></script>
 </head>
 
 <body>
@@ -17,131 +18,195 @@
         </div>
         <div class="navbar">
             <div class="content">
-                <h2>Dash</h2>
+                <h2>Dashboard</h2>
             </div>
         </div>
         <div class="statusbar">
             <div class="content">
                 <p>Operational</p>
             </div>
-            <div class="content">
-                <p>Warning</p>
-            </div>
-            <div class="content">
-                <p>Error</p>
-            </div>
         </div>
         <div class="main">
+
 
             <!-- Content One: Cups in current box -->
             <div class="content one">
                 <div class="banner">
-                    <strong><p>Machine Statistics</p></strong>
-                    <p>Alter</p>
+                    <strong>
+                        <p>Cups in Current Box</p>
+                    </strong>
+                    <p>Statistics</p>
                 </div>
                 <div class="divider"></div>
                 <div class="stats">
-                    <h1 class="big">100</h1>
+                    <h1 id="curBoxCupCount" class="big">100</h1>
                     <p>Cups in Current Box</p>
                 </div>
             </div>
 
+
+
             <!-- Content Two: Cups per Box -->
             <div class="content two">
                 <div class="banner">
-                    <strong><p>Information</p></strong>
-                    <p>Other Info</p>
+                    <strong>
+                        <p>Cups Per Box</p>
+                    </strong>
+                    <p>Alter in Control Panel</p>
                 </div>
                 <div class="divider"></div>
                 <div class="stats">
-                    <h1 class="big">24</h1>
+                    <h1 id="cupsPerBox" class="big">24</h1>
                     <p>Cups / Box</p>
                 </div>
             </div>
 
+
+
             <!-- Content Three: Total cups -->
             <div class="content three">
                 <div class="banner">
-                    <strong><p>Information</p></strong>
-                    <p>Other Info</p>
+                    <strong>
+                        <p>Total Cups</p>
+                    </strong>
+                    <p>Statistics</p>
                 </div>
                 <div class="divider"></div>
                 <div class="stats">
-                    <h1 class="big">60</h1>
+                    <h1 id="totalCups" class="big">60</h1>
                     <p>Total Cups</p>
                 </div>
             </div>
 
+
+
             <!-- Content Three: Total boxes -->
             <div class="content four">
                 <div class="banner">
-                    <strong><p>Information</p></strong>
-                    <p>Other Info</p>
+                    <strong>
+                        <p>Total Boxes</p>
+                    </strong>
+                    <p>Statistics</p>
                 </div>
                 <div class="divider"></div>
                 <div class="stats">
-                    <h1 class="big">3</h1>
+                    <h1 id="totalBoxes" class="big">3</h1>
                     <p>Total Boxes</p>
                 </div>
             </div>
 
+
+
+            <!-- Control Panel -->
             <div class="content six">
+
+                <!-- Control panel header. -->
                 <div class="banner">
-                    <strong><p>Control Panel</p></strong>
-                    <p>Other Info</p>
+                    <strong>
+                        <p>Control Panel</p>
+                    </strong>
+                    <p>Alter Machine State, Cup Type, and Send Email</p>
                 </div>
+
                 <div class="divider"></div>
+
+                <!-- Control Panel Items. -->
                 <div class="control">
+
+                    <!-- Altering cups per box. -->
+                    <div class="panel one">
+                        <form>
+                            <label for="alterCupsPerBox">Alter Cups Per Box:</label><br>
+                            <input type="text" id="alterCupsPerBox" name="alterCupsPerBox"><br>
+                        </form>
+                        <button onclick="AlterCupsPerBox()">Submit</button>
+                    </div>
+
+                    <!-- Changing cup type. -->
+                    <div class="panel two">
+                        <form>
+                            <label for="CupType">Change Cup Type:</label><br>
+                            <select name="cups" id="cups">
+                            </select>
+                        </form>
+                        <button onclick="PostNewCupType()">Submit</button>
+                    </div>
+
+                    <!-- Altering the machine state. -->
+                    <div class="panel three">
+                        <label for="machineState">Alter Machine State:</label><br>
+                        <button onclick="ToggleLid()">Toggle Lid</button>
+                        <button onclick="ToggleConveyor()">Toggle Conveyor</button>
+                        <button onclick="ToggleCalibration()">Calibrate</button>
+                        <button onclick="ToggleSequence()">Begin Sequence</button>
+                        <button onclick="AddCup()">Add Cup</button>
+                    </div>
+
+                    <!-- Send an email report manually. -->
+                    <div class="panel four">
+                        <label>Send Email Report (last 24 hours):</label>
+                        <br>
+                        <button onclick="SendEmailReport()">Send Report</button>
+                    </div>
                 </div>
             </div>
 
+
+
+            <!-- Machine Info -->
             <div class="content seven">
                 <div class="banner">
-                    <strong><p>Machine Verison Info</p></strong>
-                    <p>Other Info</p>
+                    <strong>
+                        <p>Machine Info</p>
+                    </strong>
+                    <p>Current State of Hardware</p>
                 </div>
                 <div class="divider"></div>
-                <div class="control">
+                <div>
+                    <blockquote>Version Code: <span id="versionCode">0.0.1-ALPHA</span></blockquote>
+                    <blockquote>Lid State: <span id="lidState">Open</span></blockquote>
+                    <blockquote>Conveyor State: <span id="conveyorState">Stopped</span></blockquote>
+                    <blockquote>Calibration State: <span id="calibrationState">Not calibrating</span></blockquote>
+                    <blockquote>Sequence State: <span id="sequenceState">Not Sequencing</span></blockquote>
                 </div>
             </div>
+
+
 
             <!-- Content Five: Main Chart -->
             <div class="content five">
                 <div class="banner">
-                    <strong><p>Information</p></strong>
+                    <strong>
+                        <p>Information</p>
+                    </strong>
                     <p>Other Info</p>
                 </div>
                 <div class="divider"></div>
                 <canvas id="myChart"></canvas>
+                <div class="chartControl">
+                    <form>
+                        <label for="alterTimeRange">Alter Time Range:</label><br>
+                        <div class="timeRange">
+                            <input id="js-date-picker-from" type="text" class="form-control js-date-picker" value="Oct 24, 2048">
+                            <input id="js-date-picker-to" type="text" class="form-control js-date-picker" value="Oct 24, 2048">
+                        </div>
+
+                        <label for="changeAggFrequency">Aggregation Frequency:</label><br>
+                        <select name="changeAggFrequency" id="submitAggregationChange">
+                            <option value="oneHour">One Hour</option>
+                            <option value="threeHours">Three Hours</option>
+                            <option value="sixHours">Six Hours</option>
+                            <option value="oneDay">One Day</option>
+                            <option value="threeDays">Three Days</option>
+                            <option value="oneWeek" selected="selected">One Week</option>
+                            <option value="fourWeeks">Four Weeks</option>
+                        </select>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
 
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
-                    label: 'Example dataset',
-                    borderColor: '#3993DD',
-                    data: [0, 10, 5, 2, 20, 30, 45]
-                }]
-            },
-
-            // Configuration options go here
-            options: {
-                legend: {
-                    labels: {
-                        // This more specific font property overrides the global property
-                        defaultFontFamily: "'Open Sans', sans-serif",
-                    }
-                }
-            },
-        });
-    </script>
+    <script src="./Netops.js"></script>
+    <script src="./Chart.js"></script>
 </body>

@@ -4,15 +4,19 @@
   "description": "A Node + Express + SQL app.",
   "main": "index.js",
   "scripts": {
+    "dev": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jshint": "^2.12.0",
-    "pg": "^8.4.2"
+    "nodemailer": "^6.4.16",
+    "pg": "^8.4.2",
+    "pickerjs": "^1.2.1"
   },
   "devDependencies": {
     "eslint": "^7.12.1",

@@ -7,11 +7,7 @@ module.exports = function createPostCup({ addCup }) {
                 'Content-Type': 'application/json'
             };
 
-            const cupId = await addCup({ 
-                type: httpRequest.params.type,
-                boxId: httpRequest.params.boxId,
-                wasManuallyCreated: false,
-            });
+            const cupId = await addCup();
 
             return {
                 headers: headers,

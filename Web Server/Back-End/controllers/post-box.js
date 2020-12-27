@@ -7,9 +7,7 @@ module.exports = function createPostBox({ addBox }) {
                 'Content-Type': 'application/json'
             };
 
-            const boxId = await addBox({ 
-                size: httpRequest.params.size,
-            });
+            const boxId = await addBox();
 
             return {
                 headers: headers,

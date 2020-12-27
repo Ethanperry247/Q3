@@ -12,13 +12,19 @@
     --default-padding: 10px;
     --navbar-width: 60px;
     --statusbar-width: 30px;
+
+    --experimental-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+    --experimental-background: #EBECF0;
+    --experimental-text-shadow: 1px 1px 0 #FFF;
 }
 
-html, body, main {
+html,
+body,
+main {
     margin: 0;
     height: 100%;
     width: 100%;
-     font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     background-color: var(--color-two);
 }
 
@@ -29,7 +35,16 @@ main {
     grid-template-rows: var(--navbar-width) var(--statusbar-width) 1fr;
 }
 
-h1, h2, h3, h4, h5, h6, p, ul, li, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+a {
     margin: 0;
     font-style: none;
 }
@@ -41,6 +56,61 @@ h1.big {
 
 p {
     font-size: 0.75em;
+}
+
+form select,
+form input {
+    display: inline-block;
+    width: 100%;
+    border: 1px solid var(--color-shadow);
+    padding: 11px 20px;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+form input:focus,
+form select:focus,
+form select:active {
+    border: 1px solid var(--color-four);
+}
+
+button {
+    cursor: pointer;
+    border: var(--color-four) solid 1px;
+    background-color: var(--color-two);
+    box-shadow: var(--default-shadow);
+    padding: 5px;
+    border-radius: 2px;
+    margin: 5px 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+button.negative {
+    background-color: var(--color-four);
+    color: var(--color-one);
+}
+
+form label {
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+blockquote {
+    margin: 10px 0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--color-one);
+    border-left: var(--color-four) solid 5px;
+    box-shadow: var(--default-shadow);
+}
+
+blockquote span {
+    color: var(--color-one);
+    background-color: var(--color-four);
+    border-radius: 5px;
+    padding: 2px 4px;
 }
 
 .statusbar {
@@ -83,9 +153,7 @@ p {
     align-items: center;
 }
 
-.sidebar .content {
-
-}
+.sidebar .content {}
 
 .main {
     grid-column: 2 / 3;
@@ -127,7 +195,31 @@ p {
 }
 
 .main .content .control {
-        
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.main .content .control .panel {
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: var(--color-two) 0.5px solid;
+    box-shadow: var(--default-shadow);
+    transition: 0.3s;
+}
+
+.main .content .control .panel:hover {
+    border: var(--color-four) 0.5px solid;
+    transition: 0.3s;
+}
+
+.main .content .chartControl .timeRange {
+    display: flex;
+    gap: 10px;
 }
 
 

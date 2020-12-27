@@ -34,6 +34,20 @@ module.exports.Box = class Box {
     }
 };
 
+module.exports.TimeFrame = class TimeFrame {
+    constructor({ startTime, endTime }) {
+        if (isNaN(startTime)) {
+            throw new Error("Start time was not given as a number of seconds since Jan 1, 1970!");
+        }
+        this.startTime = new Date(Number(startTime));
+
+        if (isNaN(endTime)) {
+            throw new Error("End time was not given as a number of seconds since Jan 1, 1970!");
+        }
+        this.endTime = new Date(Number(endTime));
+    }
+};
+
 // A device which represents the state of the actual, physical device.
 module.exports.Device = class Device {
     constructor({

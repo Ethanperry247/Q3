@@ -1,10 +1,7 @@
-const models = require('../models');
-
 module.exports = function createAddBox({ database }) {
-    return async function addBox(boxInfo) {
+    return async function addBox() {
         try {
-            const box = new models.Box(boxInfo);
-            return await database.insertBox(box);
+            return await database.insertBox();
         } catch (e) {
             throw e;
         }
