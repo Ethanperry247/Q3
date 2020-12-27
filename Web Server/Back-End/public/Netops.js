@@ -38,12 +38,6 @@ const GetBoxesPerTime = async (startTime, endTime) => {
     return json && json.boxes;
 };
 
-const GetMachineVersionInfo = async () => {
-    const response = await fetch(`api/cups/machine`);
-    const json = await response.json();
-    document.getElementById("versionCode").innerHTML = json;
-};
-
 // Retrieves the current cup type being inserted into the database.
 const GetCurrentCupType = async () => {
     const response = await fetch(`api/cups/type`);
@@ -51,30 +45,16 @@ const GetCurrentCupType = async () => {
     document.getElementById("cups").value = json.type;
 };
 
-const GetConveyorState = async () => {
-    const response = await fetch(`api/cups/conveyor`);
+const GetMachineVersionInfo = async () => {
+    const response = await fetch(`api/machine`);
     const json = await response.json();
-    document.getElementById("conveyorState").innerHTML = json;
+    console.log(json);
+    document.getElementById("versionCode").innerHTML = json.machine.id;
+    document.getElementById("conveyorState").innerHTML = json.machine.conveyorstate ? "Running" : "Stopped";
+    document.getElementById("lidState").innerHTML = json.machine.lidstate ? "Open" : "Closed";
+    document.getElementById("calibrationState").innerHTML = json.machine.motorcalibrating ? "Calibrating" : "Not Calibrating";
+    document.getElementById("sequenceState").innerHTML = json.machine.sequencing ? "Sequencing" : "Not Sequencing";
 };
-
-const GetLidState = async () => {
-    const response = await fetch(`api/cups/lid`);
-    const json = await response.json();
-    document.getElementById("lidState").innerHTML = json;
-};
-
-const GetCalibrationState = async () => {
-    const response = await fetch(`api/cups/calibrate`);
-    const json = await response.json();
-    document.getElementById("calibrationState").innerHTML = json;
-};
-
-const GetSequenceState = async () => {
-    const response = await fetch(`api/cups/sequence`);
-    const json = await response.json();
-    document.getElementById("sequenceState").innerHTML = json;
-};  
-
 
 // Control Panel methods.
 // Alters the cup type entering the database.
@@ -157,11 +137,13 @@ const CreateRoutineCheck = () => {
     GetCurrentCupType();
     GetCupsInCurrentBox();
     GetCupsPerBox();
+    GetMachineVersionInfo();
     setInterval(() => {
         GetTotalBoxes();
         GetTotalCups();
         GetCupsInCurrentBox();
         GetCupsPerBox();
+        GetMachineVersionInfo();
         // GetMachineVersionInfo();
         // GetCurrentCupType();
         // GetConveyorState();

@@ -48,16 +48,7 @@ app.post(`/api/sequence/:state`, createCallback(updateSequenceController)); // I
 app.post(`/api/reset`, () => {}); // Resets the machine and machine gateway.
 
 // Get machine state.
-app.get(`/api/machine`, createCallback(getMachineController)); // Gets the latest machine.
-app.get(`/api/conveyor`, () => {}); // Alters the conveyor state.
-app.get(`/api/lid`, () => {}); // Alters the lid state.
-app.get(`/api/calibrate`, () => {}); // Triggers a calibration.
-app.get(`/api/sequence`, () => {}); // Triggers a sequence.
-
-// Querying machine state.
-app.get(`/api/conveyor`, () => {}); // Queries the state of the conveyor.
-app.get(`/api/lid`, () => {}); // Queries the state of the lid.
-
+app.get(`/api/machine`, createCallback(getMachineController)); // Gets the latest machine.  
 
 // Alter cup type.
 app.post('/api/cups/type', createCallback(alterTypeController)); // Changes the cup type.
